@@ -56,11 +56,12 @@ static uint16_t non_combo_input_timer = 0;
 //   of single, if pressing two fingers for one symbol, might as
 //   well keep it on a layer instead.
 // - Move QUOTES to a combo or at least away from the pinky.
+// - Add keys for screenshots, especially the one to clipboard
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT(
       KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
-      CTL_BSP, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                        KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+      CTL_BSP, CTL_A,   ALT_S,   GUI_D,   SFT_F,   KC_G,                                        KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    CAPS,    LOWER,   SNAKE,   SNK_SCM, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
                                  KC_LGUI, RAISE,   SYSTEM,  LOW_SPC, ADAPT,   LOW_ENT, OS_RAIS, RAI_ADP, ADAPT,   KC_LALT
     ),
@@ -80,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_SYSTEM] = LAYOUT(
-      _______, QUIT,    _______, SW_WIN,  _______, ITERM,                                       _______, _______, _______, _______, _______, _______,
+      _______, QUIT,    CLOSE,   SW_WIN,  RELOAD,  ITERM,                                       _______, _______, _______, _______, _______, _______,
       _______, KC_9,    KC_5,    KC_3,    KC_1,    ALFRED,                                      _______, KC_0,    KC_2,    KC_4,    KC_8,    _______,
       _______, _______, _______, _______, KC_7,    _______, _______, _______, _______, _______, _______, KC_6,    _______, _______, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -199,6 +200,62 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     return term;
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CTL_A:
+        case ALT_S:
+            return TAPPING_TERM + 50;
+        case LOW_SPC:
+            return TAPPING_TERM + 100;
+        case GUI_D:
+        case SFT_F:
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CTL_A:
+        case ALT_S:
+        case GUI_D:
+        case SFT_F:
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CTL_A:
+        case ALT_S:
+        case GUI_D:
+        case SFT_F:
+            // Do not force the mod-tap key press to be handled as a modifier
+            // if any other key was pressed while the mod-tap key is held down.
+            return true;
+        default:
+            // Force the mod-tap key press to be handled as a modifier if any
+            // other key was pressed while the mod-tap key is held down.
+            return false;
+    }
+}
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CTL_A:
+        case ALT_S:
+        case GUI_D:
+        case SFT_F:
+            // Immediately select the hold action when another key is tapped.
+            return true;
+        default:
+            // Do not select the hold action when another key is tapped.
+            return false;
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     update_swapper(&sw_win_active, KC_LGUI, KC_TAB, SW_WIN, keycode, record);
 
@@ -237,7 +294,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CURLYS:
             if (record->event.pressed) {
                 last_combo = keycode;
-                SEND_STRING("{ }"SS_TAP(X_LEFT));
+                SEND_STRING("{}"SS_TAP(X_LEFT));
             }
             return false;
         case PARENS:
@@ -249,10 +306,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CTL_BSP:
             if (record->event.pressed) {
                 switch (last_keycode) {
-                    case PARENS:
                     case CURLYS:
+                        tap_code16(KC_END);
+                        tap_code16(KC_BSPC);
+                        tap_code16(KC_BSPC);
+                        return false;
+                    case PARENS:
                     case QUOTES:
-                        tap_code16(KC_RIGHT);
+                        tap_code16(KC_END);
                         tap_code16(KC_BSPC);
                         tap_code16(KC_BSPC);
                         return false;
@@ -262,11 +323,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case ADAPT:
             if (record->event.pressed) {
                 switch (last_keycode) {
-                    case QUOTES:
-                        SEND_STRING("IT WORKS");
-                        return false;
                     case CURLYS:
-                        SEND_STRING(" -> "SS_TAP(X_ENTER));
+                        SEND_STRING("->"SS_TAP(X_ENTER));
                         return false;
                     case PARENS:
                         SEND_STRING("\"\""SS_TAP(X_LEFT));
@@ -275,11 +333,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 switch (last_combo) {
                     case QUOTES:
                         last_combo = KC_NO;
-                        SEND_STRING("IT WORKS 2");
+                        SEND_STRING(":$");
                         return false;
                     case CURLYS:
                         last_combo = KC_NO;
-                        SEND_STRING(" -> ");
+                        SEND_STRING("-> ");
                         return false;
                     case PARENS:
                         last_combo = KC_NO;

@@ -5,15 +5,15 @@
 // R3
 COMB(WE_LCBR,            KC_LCBR,              KC_W, KC_E)
 COMB(ER_RCBR,            KC_RCBR,              KC_E, KC_R)
-SUBS(WR_CBR_PAIR,        "{ }",                KC_W, KC_R)
+SUBS(WR_CBR_PAIR,        "{}",                 KC_W, KC_R)
 COMB(WER_CBR_PAIR_IN,    CURLYS,               KC_W, KC_E, KC_R)
 COMB(RT_PIPE,            KC_PIPE,              KC_R, KC_T)
 
 // R2
-COMB(SD_LPRN,            KC_LPRN,              KC_S, KC_D)
-COMB(DF_RPRN,            KC_RPRN,              KC_D, KC_F)
-SUBS(SF_PRN_PAIR,        "()",                 KC_S, KC_F)
-COMB(SDF_PRN_PAIR_IN,    PARENS,               KC_S, KC_D, KC_F)
+COMB(SD_LPRN,            KC_LPRN,              ALT_S, GUI_D)
+COMB(DF_RPRN,            KC_RPRN,              GUI_D, SFT_F)
+SUBS(SF_PRN_PAIR,        "()",                 ALT_S, SFT_F)
+COMB(SDF_PRN_PAIR_IN,    PARENS,               ALT_S, GUI_D, SFT_F)
 
 // R1
 COMB(XC_COPY,            LGUI(KC_C),           KC_X, KC_C)
@@ -28,8 +28,8 @@ COMB(ZX_UNDO,            LGUI(KC_Z),           KC_Z, KC_X)
 
 // R3
 COMB(YU_AMPR,            KC_AMPR,              KC_Y, KC_U)
-SUBS(UI_QUES_DOT,        "?.",                 KC_U, KC_I)
-SUBS(IO_NOT_EQL,         "!=",                 KC_I, KC_O)
+SUBS(UI_QUES_DOT,        "!=",                 KC_U, KC_I)
+SUBS(IO_NOT_EQL,         "?.",                 KC_I, KC_O)
 COMB(UIO_SNAKE_SCREAM,   SNK_SCM,              KC_U, KC_I, KC_O)
 
 // R2
@@ -39,8 +39,7 @@ COMB(KL_TAB,             KC_TAB,               KC_K, KC_L)
 COMB(JL_EQL,             KC_EQL,               KC_J, KC_L)
 
 // R1
-SUBS(NM_LOG,             "!\"\""SS_TAP(X_LEFT),KC_N, KC_M)
-COMB(MCOM_DLR,           KC_DLR,               KC_M, KC_COMM)
+SUBS(MCOM_DLR,           "!\"\""SS_TAP(X_LEFT),KC_M, KC_COMM)
 SUBS(LTGT_ARROW,         "->",                 KC_COMM, KC_DOT)
 
 // ==========
@@ -49,8 +48,8 @@ SUBS(LTGT_ARROW,         "->",                 KC_COMM, KC_DOT)
 
 // TODO I need to come up with something better than this cause
 //      this sucks...
-COMB(SWE_AO,             SE_AO,                KC_A, KC_O)
-COMB(SWE_AE,             SE_AE,                KC_A, KC_E)
+COMB(SWE_AO,             SE_AO,                CTL_A, KC_O)
+COMB(SWE_AE,             SE_AE,                CTL_A, KC_E)
 COMB(SWE_OE,             SE_OE,                KC_O, KC_E)
 
 // vim:ft=c
