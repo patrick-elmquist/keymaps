@@ -13,7 +13,7 @@
 //   that should cover the thumb cluster for a Corne and Lily58.
 
 #define _____________________QWERTY_L1______________________ KC_TAB,  KC_Q,    KC_W,    KC_E,   KC_R,    KC_T
-#define _____________________QWERTY_L2______________________ KC_LCTL, KC_A,    KC_S,    KC_D,   KC_F,    KC_G
+#define _____________________QWERTY_L2______________________ CTL_BSP, CTL_A,   ALT_S,   GUI_D,  SFT_F,    KC_G
 #define _____________________QWERTY_L3______________________ KC_LSFT, KC_Z,    KC_X,    KC_C,   KC_V,    KC_B
 
 #define _____________________QWERTY_R1______________________ KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_BSLS

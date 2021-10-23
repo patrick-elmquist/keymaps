@@ -12,7 +12,7 @@ $(KEYBOARDS):
 	git submodule update --init --recursive
 
 	# cleanup old symlinks
-	for f in $(KEYBOARDS); do rm -rf qmk_firmware/keyboards/$(PATH_$@)/keymaps/$(USER); done
+	rm -rf qmk_firmware/keyboards/$(PATH_$@)/keymaps/$(USER)
 	rm -rf qmk_firmware/users/$(USER)
 
 	# add new symlinks
@@ -26,9 +26,12 @@ $(KEYBOARDS):
 	make BUILD_DIR=$(shell pwd)/build -j1 -C qmk_firmware $(PATH_$@):$(USER)
 
 	# cleanup symlinks
-	for f in $(KEYBOARDS); do rm -rf qmk_firmware/keyboards/$(PATH_$@)/keymaps/$(USER); done
+	rm -rf qmk_firmware/keyboards/$(PATH_$@)/keymaps/$(USER)
 	rm -rf qmk_firmware/users/$(USER)
 
 clean:
 	rm -rf ./build/
+	rm -rf qmk_firmware/keyboards/$(PATH_lily58)/keymaps/$(USER)
+	rm -rf qmk_firmware/keyboards/$(PATH_kyria)/keymaps/$(USER)
+	rm -rf qmk_firmware/users/$(USER)
 

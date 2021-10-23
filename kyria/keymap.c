@@ -19,13 +19,6 @@
 #include "pket.h"
 #include "g/keymap_combo.h"
 
-#define LOW_ENT LT(_LOWER, KC_ENT)
-#define LOW_SPC LT(_LOWER, KC_SPC)
-#define RAI_ESC LT(_RAISE, KC_ESC)
-#define RAI_REP LT(_RAISE, REPEAT)
-#define RAI_ADP LT(_RAISE, ADAPT)
-#define CTL_BSP LCTL_T(KC_BSPC)
-
 bool sw_win_active = false;
 oneshot_state os_shft_state = os_up_unqueued;
 oneshot_state os_ctrl_state = os_up_unqueued;
@@ -154,12 +147,20 @@ bool terminate_case_modes(uint16_t keycode, const keyrecord_t *record) {
 }
 
 // Combo functions
+bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+    return true;
+}
+
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     char id;
     uint16_t term;
     switch (index) {
         case WE_LCBR:
         case ER_RCBR:
+            id = timer_elapsed(non_combo_input_timer) > 350 ? '1' : '2';
+            term = timer_elapsed(non_combo_input_timer) > 350 ? 25 : 5;
+            break;
+
         case WR_CBR_PAIR:
 
         case SD_LPRN:
@@ -177,12 +178,12 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case XCV_PASTE_SFT:
         case WER_CBR_PAIR_IN:
         case SDF_PRN_PAIR_IN:
-            id = timer_elapsed(non_combo_input_timer) > 300 ? '1' : '2';
+            id = timer_elapsed(non_combo_input_timer) > 300 ? '3' : '4';
             term = timer_elapsed(non_combo_input_timer) > 300 ? 30 : 5;
             break;
 
         case UIO_SNAKE_SCREAM:
-            id = '3';
+            id = '5';
             term = 25;
             break;
 
@@ -192,7 +193,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
         case KL_TAB:
         case JK_ESC:
         default:
-            id = '4';
+            id = '6';
             term = 35;
             break;
     }
@@ -202,11 +203,12 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case CTL_A:
         case ALT_S:
-            return TAPPING_TERM + 50;
+            return TAPPING_TERM + 100;
         case LOW_SPC:
             return TAPPING_TERM + 100;
+        case CTL_A:
+            return TAPPING_TERM + 75;
         case GUI_D:
         case SFT_F:
         default:
@@ -242,6 +244,8 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+// TODO this is effectively disabled now, if this feels better,
+//      remove the function and the entry in config instead.
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case CTL_A:
@@ -249,7 +253,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
         case GUI_D:
         case SFT_F:
             // Immediately select the hold action when another key is tapped.
-            return true;
+            return false;
         default:
             // Do not select the hold action when another key is tapped.
             return false;
