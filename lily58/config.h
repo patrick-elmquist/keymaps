@@ -24,6 +24,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define SPLIT_MODS_ENABLE
 
+#define ONESHOT_TAP_TOGGLE 2
+#define ONESHOT_TIMEOUT 3000
+
+#define TAPPING_TERM_PER_KEY
+#define TAPPING_FORCE_HOLD_PER_KEY
+
+#define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+#define PERMISSIVE_HOLD_PER_KEY
+
+#define SPLIT_MODS_ENABLE
+
 #ifdef OLED_FONT_H
     #undef OLED_FONT_H
 #endif
