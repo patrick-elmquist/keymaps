@@ -15,7 +15,7 @@ UNICODE_ENABLE = no         # Unicode
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 RGBLIGHT_ENABLE = no        # Enable WS2812 RGB underlight. 
 SWAP_HANDS_ENABLE = no      # Enable one-hand typing
-OLED_ENABLE = yes     			# OLED display
+OLED_ENABLE = yes           # OLED display
 ENCODER_ENABLE = no         # Enables the use of one or more encoders
 
 AUTO_SHIFT_ENABLE = no
@@ -25,16 +25,17 @@ COMBO_ENABLE = yes
 DYNAMIC_MACRO_ENABLE = no
 
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
-SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
+SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
 
 # To use gboards combos
-VPATH  +=  keyboards/gboards/
+VPATH += keyboards/gboards/
 
-SRC +=  ./features/oneshot.c \
-        ./features/swapper.c \
-        ./features/casemodes.c \
-        ./features/repeat.c \
-        ./oled.c \
-	
+SRC += ./pket.c \
+       ./features/oneshot.c \
+       ./features/swapper.c \
+       ./features/casemodes.c \
+       ./features/repeat.c \
+       ./oled.c \
+
 EXTRAFLAGS += -flto
 
