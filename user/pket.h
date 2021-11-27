@@ -20,18 +20,18 @@
 #define _____________________QWERTY_R2______________________ KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT
 #define _____________________QWERTY_R3______________________ KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_MINS
 
-#define _____________________LOWER__L1______________________ _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE
-#define _____________________LOWER__L2______________________ _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV
+#define _____________________LOWER__L1______________________ _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC
+#define _____________________LOWER__L2______________________ _______, KC_HASH, BRCKETS, PARENS,  CURLYS,  KC_GRV
 #define _____________________LOWER__L3______________________ _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD
 
-#define _____________________LOWER__R1______________________ _______, _______, _______, _______, _______, KC_BSLS
+#define _____________________LOWER__R1______________________ KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSLS
 #define _____________________LOWER__R2______________________ KC_PLUS, KC_MINS, KC_SLSH, KC_ASTR, _______, KC_QUOT
 #define _____________________LOWER__R3______________________ KC_AMPR, KC_EQL,  KC_COMM, KC_DOT,  KC_SLSH, KC_MINS
 
 
 #define _____________________RAISE__L1______________________ _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5
-#define _____________________RAISE__L2______________________ _______, OS_LCTL, OS_LALT, OS_LGUI, OS_LSFT, _______
-#define _____________________RAISE__L3______________________ _______, _______, _______, _______, _______, _______
+#define _____________________RAISE__L2______________________ _______, _______, KC_LBRC, KC_LPRN, KC_LCBR, SFT_G
+#define _____________________RAISE__L3______________________ _______, _______, KC_RBRC, KC_RPRN, KC_RCBR, _______
 
 #define _____________________RAISE__R1______________________ KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______
 #define _____________________RAISE__R2______________________ KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, QUOTES

@@ -30,6 +30,8 @@
 #define ALT_L LALT_T(KC_L)
 #define CTL_SCLN RCTL_T(KC_SCLN)
 
+#define SFT_G LSFT(KC_G)
+
 enum custom_keycodes {
     OS_LCTL = SAFE_RANGE,
     OS_LALT,
@@ -42,6 +44,7 @@ enum custom_keycodes {
     ADAPT,
     QUOTES,
     PARENS,
+    BRCKETS,
     CURLYS,
 
     CAPS,
