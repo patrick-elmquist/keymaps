@@ -40,6 +40,7 @@
 //   well keep it on a layer instead.
 // - Move QUOTES to a combo or at least away from the pinky.
 // - Add keys for screenshots, especially the one to clipboard
+// - Add keys for TickTick shortcuts
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT_wrapper(

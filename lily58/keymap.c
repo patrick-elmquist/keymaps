@@ -3,9 +3,7 @@
 // TODO move enter and change thumb shift to one shot and perhaps toggle Word cap on double tap
 // TODO update the combo term since io and er seems to misfire
 // TODO can I solve the issues with CMD (SFT) + N by having OSM CMD and SFT on SPC and ENT
-// TODO would it be nice to move enter to a layer or combo and use ENT as OS SFT instead of having to press it
-//      perhaps a follow up to the above could be to toggle CAPS Word if pressing the ENT OSM twice
-// TODO when adding a number layer, make dubble tapping it toggle NUMWORD
+// TODO make double tapping the number layer toggle NUMWORD
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT_wrapper( \

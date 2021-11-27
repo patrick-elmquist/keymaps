@@ -10,10 +10,6 @@
 #include "features/repeat.h"
 #include "features/casemodes.h"
 
-// TODO
-// - Create a small version for the 3 middle thumb keys on the Kyria,
-//   that should cover the thumb cluster for a Corne and Lily58.
-
 #define _____________________QWERTY_L1______________________ KC_TAB,  KC_Q,    KC_W,    KC_E,   KC_R,    KC_T
 #define _____________________QWERTY_L2______________________ CTL_BSP, CTL_A,   ALT_S,   GUI_D,  SFT_F,    KC_G
 #define _____________________QWERTY_L3______________________ KC_LSFT, KC_Z,    KC_X,    KC_C,   KC_V,    KC_B
